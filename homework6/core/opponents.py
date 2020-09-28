@@ -12,7 +12,7 @@ class Opponents:
         if len(opponents) != 2:
             raise ValueError('Exactly 2 opponents must fight against each other.')
         self.opponents = opponents
-        self.opponent_one: Spaceship = opponents[0]
+        self.opponent_one = opponents[0]
         self.opponent_two = opponents[1]
 
         # Can randomize to cover the extra point
@@ -24,7 +24,7 @@ class Opponents:
 
     def next_round(self):
         # attack step
-        self.opponent_two.attack(self.defender)
+        self.attacker.attack(self.defender)
 
         # could be probably be done in a smarter way
         new_attacker = self.defender

@@ -21,11 +21,11 @@ def members():
     username = request.form.get('username')
     content = request.form.get('content')
 
-    save_to_file(session_id, username, content)
+    _save_to_file(session_id, username, content)
     return 'OK'
 
 
-def save_to_file(file_name, first_param, second_param):
+def _save_to_file(file_name, first_param, second_param):
     full_name = f'./csv/{file_name}'
     with open(full_name, 'a+') as file:
         file.write(f'{first_param},{second_param}\n')

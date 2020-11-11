@@ -11,3 +11,11 @@
 ### Guide to the code:
 1. The API requests are defined in views.py
 2. All the database models are defined in models.py
+3. Logging configuration is defined in `library_app/__init__.py`
+
+### Testing
+* Running the tests: `pytest`
+* For coverage, run: 
+1. `coverage -m pytest`
+2. `coverage html`
+3. Open `/htmlcov/index.html` in the browser

@@ -1,6 +1,8 @@
 """
 Description: Requests supported by the flask app.
 """
+import logging
+
 import sqlalchemy
 from flask import jsonify, request, make_response
 
@@ -27,6 +29,10 @@ def authors_view():
 
     if request.method == 'POST':
         try:
+            allowed_fields = ['name', 'country', 'year_of_birth']
+            extra_fields = {k:v for k,v in request.json.items() if k not in allowed_fields}
+            if len(extra_fields) > 0:
+                return make_response(jsonify(response="Only name, country and year_of_birth are allowed"), 400)
             author.create(name=request.json['name'],
                           country=request.json.get('country'),
                           year_of_birth=request.json.get('year_of_birth'))
@@ -37,6 +43,7 @@ def authors_view():
 
 @app.route('/author/<int:author_id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def author_view(author_id):
+    logging.info(f'User has given input author_id as: {author_id}')
     author_result = author.get(author_id)
     if author_result is None:
         return make_response(jsonify(response=f'Author with id {author_id} not found'), 404)
@@ -48,6 +55,7 @@ def author_view(author_id):
         author.delete(author_result)
         return jsonify(response='OK')
 
+    logging.info(f'request method is: {request.method}')
     if request.method in ['PUT', 'PATCH']:
         try:
             if request.method == 'PATCH':

@@ -3,29 +3,14 @@ Description: Setup the flask application.
 """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from logging.config import dictConfig
+import logging
 
-dictConfig({
-    'version': 1,
-    'formatters': {
-        'default': {
-            'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-        }
-    },
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s :: %(module)s: :: %(levelname)s :: %(message)s')
 
 app = Flask(__name__)
-app.secret_key = 'dev'
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # enter path to the sqlite file here. A new db is created if one does not exist.
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.sqlite'
 

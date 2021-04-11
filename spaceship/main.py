@@ -1,0 +1,3 @@
+import spaceships
+
+spaceships.main()

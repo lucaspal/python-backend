@@ -20,7 +20,7 @@ class Flower(ABC):
 
     def __str__(self):
         if self.is_dead():
-            return 'Flower name: {name} ({description}). ' \
+            return 'Flower Name: {name} ({description}). ' \
                    'This flower is dead.'.format(name=self._name,
                                                  description=self._description)
         else:

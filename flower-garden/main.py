@@ -13,7 +13,7 @@ def main():
     while not experiment.is_over():
         experiment.process_day()
 
-    print('Experiment Done. Glad you enjoyed it.')
+    experiment.print_experiment_result()
 
 
 if __name__ == '__main__':

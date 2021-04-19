@@ -28,6 +28,21 @@ class Experiment:
         """ The experiment is over when all days have passed or if all flowers are dead. """
         return self._current_day == self._days or all(map(lambda flower: flower.is_dead(), self.flowers))
 
+    def print_experiment_result(self):
+        """ Prints the result of the experiment (whether it was successful or not).
+            To be called when the experiment is over.
+            :raises ValueError if called when the experiment is not over yet.
+        """
+        if not self.is_over():
+            raise ValueError('The experiment is not over! There is no meaningful result at the moment.')
+
+        if self._current_day == self._days:
+            print('=> Experiment Over. At least one flower survived.')
+        else:
+            print('=> Experiment Over on day {current_day}/{total_days}. All flowers are dead.'.format(
+                current_day=self._current_day,
+                total_days=self._days))
+
     def _print_state(self):
         """ Prints, in the console, the statistics of the day. """
         flowers_alive = len(list(filter(lambda f: not f.is_dead(), self.flowers)))

@@ -8,14 +8,14 @@ class Experiment:
     def __init__(self, days: int, flowers: List[Flower]):
         self._days = days
         self.flowers = flowers
-        self._current_day = 1
+        self._current_day = 0
 
     def process_day(self):
         """ Processing of a new day simulates weather conditions and see how flowers react.
         You will see the results of this printed to the console. """
 
         weather_condition = Weather.pick_random()
-        print('=> Day {current_day}/{total_days} [Today is {weather}]'.format(current_day=self._current_day,
+        print('=> Day {current_day}/{total_days} [Today is {weather}]'.format(current_day=self._current_day + 1,
                                                                               total_days=self._days,
                                                                               weather=weather_condition))
 

@@ -10,7 +10,14 @@ class Experiment:
         self.flowers = flowers
         self._current_day = 0
 
-    def process_day(self):
+    def run(self):
+        """ Runs the experiments and prints the result. """
+        while not self._is_over():
+            self._process_day()
+
+        self._print_experiment_result()
+
+    def _process_day(self):
         """ Processing of a new day simulates weather conditions and see how flowers react.
         You will see the results of this printed to the console. """
 
@@ -20,22 +27,22 @@ class Experiment:
         self._print_state()
         self._current_day += 1
 
-    def is_over(self):
+    def _is_over(self):
         """ The experiment is over when all days have passed or if all flowers are dead. """
         return self._current_day == self._days or all(map(lambda flower: flower.is_dead(), self.flowers))
 
-    def print_experiment_result(self):
+    def _print_experiment_result(self):
         """ Prints the result of the experiment (whether it was successful or not).
             To be called when the experiment is over.
             :raises ValueError if called when the experiment is not over yet.
         """
-        if not self.is_over():
+        if not self._is_over():
             raise ValueError('The experiment is not over! There is no meaningful result at the moment.')
 
         if self._current_day == self._days:
             print('=> Experiment Over. At least one flower survived.')
         else:
-            print('=> Experiment Over on day {current_day}/{total_days}. All flowers are dead.'.format(
+            print('=> Experiment over on day {current_day}/{total_days}. All flowers are dead.'.format(
                 current_day=self._current_day,
                 total_days=self._days))
 

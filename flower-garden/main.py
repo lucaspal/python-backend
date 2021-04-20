@@ -9,11 +9,7 @@ def main():
     number_of_days = 1000
 
     experiment = Experiment(days=number_of_days, flowers=flowers)
-
-    while not experiment.is_over():
-        experiment.process_day()
-
-    experiment.print_experiment_result()
+    experiment.run()
 
 
 if __name__ == '__main__':
